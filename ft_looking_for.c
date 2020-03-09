@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_looking_for.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvarela <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/29 15:12:20 by lvarela           #+#    #+#             */
-/*   Updated: 2020/03/09 19:34:03 by lvarela          ###   ########.fr       */
+/*   Created: 2020/03/06 16:43:32 by lvarela           #+#    #+#             */
+/*   Updated: 2020/03/06 16:56:49 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	main()
+int	ft_looking_for(t_list *list)
 {
-	int j;
-	//int k;
-	
-	//int i;
-	//i = printf("%s" , "hola");
-	//printf("\n%d", i);
-	j = ft_printf("Hola que tal estas %-6s%-3c\n", "Laura", 'h');
-	printf("%d\n", j);
-	j = 0;
-	printf("%d\n", j);
-	j = ft_printf("Hola que tal %-6s\n", "Laura");
-	printf("%d\n", j);
-	return (0);
+	if (list->format[list->len] == 'c'/* || list->format == 'S' || list->format == 'p' || list->format == 'd' 
+	|| list->format == 'i' || list->format == 'u' || list->format == '%' || list->format == 'x' 
+	|| list->format == 'X'*/)
+		return (1);
+	else
+		return (0);
 }

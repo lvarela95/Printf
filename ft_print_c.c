@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_print_c.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvarela <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/29 15:12:20 by lvarela           #+#    #+#             */
-/*   Updated: 2020/03/09 19:34:03 by lvarela          ###   ########.fr       */
+/*   Created: 2020/03/04 21:13:36 by lvarela           #+#    #+#             */
+/*   Updated: 2020/03/09 19:28:10 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	main()
+int	ft_print_c(t_list *list)
 {
-	int j;
-	//int k;
-	
-	//int i;
-	//i = printf("%s" , "hola");
-	//printf("\n%d", i);
-	j = ft_printf("Hola que tal estas %-6s%-3c\n", "Laura", 'h');
-	printf("%d\n", j);
-	j = 0;
-	printf("%d\n", j);
-	j = ft_printf("Hola que tal %-6s\n", "Laura");
-	printf("%d\n", j);
-	return (0);
+	char c;
+	int i;
+
+	i = 1;
+	c = va_arg(list->arg, int);
+	if (list->width != 0)
+	{
+		write(1, &c, 1);
+		while (i++ < list->width)
+			write(1, " ", 1);
+	}
+	else
+		write(1, &c, 1);
+	return (1);
 }

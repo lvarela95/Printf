@@ -6,65 +6,53 @@
 /*   By: lvarela <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:58:21 by lvarela           #+#    #+#             */
-/*   Updated: 2020/02/06 16:57:45 by lvarela          ###   ########.fr       */
+/*   Updated: 2020/03/09 19:30:39 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
+#include "ft_printf.h"
 
-int	which_is(char *str)
+int	ft_printf(const char *str, ...)
 {
-	if (*str == 'c' || *str == 's')
-	{
-		//imprimir string o carácter
-	}
-	if (*str == 'e' || *str == 'f' || *str == 'g' )
-	{
-		//imrpimir flotantes
-	}
-	if (*str == )
-}
-
-int	ft_lookingfor(char *str)
-{
-	if (*str == 'c' || *str == 'S' || *str == 'p' || *str == 'd' 
-	|| *str == 'i' || *str == 'u' || *str == '%' || *str == 'x' || *str == 'X')
-		return (1);
-	else
-		return (0);
-}
-
-int	ft_printf(char *str, ...)
-{
-	int i = 0;
-	int is_or_not = 0;
+	int ret;
+	t_list list;
+	va_start(list.arg, str);
 	
-	while (str[i] != '\0')
+	ret = 0;
+	list.len = 0;
+	list.format = (char *)str;
+	while (str[list.len] != '\0')
 	{
-		if (str[i] == '%')
+		if (str[list.len] == '%')
 		{
-			i++;
-			is_or_not = ft_lookingfor(&str[i]);
-			if (is_or_not == 1)
-				which_is(&str[i]);
-			if (is_or_not == 0)
-				width(&str[i]);
+			list.len++;
+			ft_list_init(&list);
+			if (str[list.len] == '%')
+			{
+				write(1, "%", 1);
+				ret++;
+			}
+			else if (str[list.len] == '-')
+			{
+				list.len++;
+				ft_atoi(&list);
+				if (list.width != 0)
+				{
+					ret += ft_which_is(&list);
+				}
+				else if (ft_looking_for(&list) == 1)
+					ret += ft_which_is(&list);
+			}
+			else 
+				ret += ft_which_is(&list);
 		}
 		else
-			write(1, &str[i], 1);
-		i++;
+		{
+			write(1, &str[list.len], 1);
+			ret++;
+		}
+		list.len++;
 	}
-	
-	return (i);
-}
-
-int	main()
-{
-	char *str = "hola que tal estas?%s";
-	int len;
-	
-	len = ft_printf(str);
-	printf("%d",len);
-	return (0);
+	va_end(list.arg);
+	return (ret);
 }
